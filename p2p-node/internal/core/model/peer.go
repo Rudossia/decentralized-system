@@ -19,16 +19,16 @@ type Peer struct {
 	// Используется для верификации его личности.
 	PubKey crypto.PublicKey
 	// lastSeen - время последнего успешного контакта с пиром.
-	// Это поле используется для логики вытеснения из k-корзин.
+	// Это  используется для логики вытеснения из k-корзин.
 	lastSeen time.Time
 }
 
 // NewPeer создает новый экземпляр Peer.
 func NewPeer(id NodeID, addrs []multiaddr.Multiaddr, pubKey crypto.PublicKey) *Peer {
 	return &Peer{
-		ID:       id,
-		Addrs:    addrs,
-		PubKey:   pubKey,
+		ID: id,
+		Addrs: addrs,
+		PubKey: pubKey,
 		lastSeen: time.Now(),
 	}
 }

@@ -16,7 +16,7 @@ const (
 type NodeID [NodeIDBytes]byte
 
 // XORDistance вычисляет XOR-расстояние между двумя NodeID.
-// Это расстояние используется для определения "близости" узлов.
+// Это расстояние используется для определения близости узлов.
 func (n NodeID) XORDistance(other NodeID) NodeID {
 	var result NodeID
 	for i := 0; i < NodeIDBytes; i++ {
