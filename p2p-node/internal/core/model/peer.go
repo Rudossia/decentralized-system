@@ -264,9 +264,9 @@ func (p *Peer) ToPeerRecord(seq uint64, ttl time.Duration) PeerRecord {
 	}
 	return PeerRecord{
 		NodeID:          p.ID,
-		Addrs:           cloneStrings(p.Addrs),
+		Addrs:           normalizeStringSet(p.Addrs),
 		PublicKey:       cloneBytes(p.PubKey),
-		Capabilities:    cloneStrings(p.Capabilities),
+		Capabilities:    normalizeStringSet(p.Capabilities),
 		ProtocolVersion: p.ProtocolVersion,
 		Agent:           p.Agent,
 		Seq:             seq,
