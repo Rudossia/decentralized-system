@@ -2,13 +2,11 @@
 package model
 
 import (
-	//"crypto/sha1"
-	//"encoding/binary"
 	"math/bits"
 )
 
 const (
-	// NodeIDBytes - это длина NodeID в байтах ПО ГОСТ 256.
+	// NodeIDBytes - это длина NodeID в байтах ПО ГОСТ 256. ГОСТ 34.11-2012(вроде)
 	NodeIDBytes = 32
 )
 
