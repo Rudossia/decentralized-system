@@ -246,13 +246,3 @@ func (r StoreResult) Clone() StoreResult {
 		Errors:      errorsCopy,
 	}
 }
-
-func cloneNodeIDs(values []model.NodeID) []model.NodeID {
-	if len(values) == 0 {
-		return nil
-	}
-
-	cp := make([]model.NodeID, len(values))
-	copy(cp, values)
-	return cp
-}

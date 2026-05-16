@@ -39,8 +39,7 @@ func NewNode(self *model.Peer, cfg Config) (*Node, error) {
 }
 
 // NewNodeFromID создаёт DHT-узел только по NodeID.
-//
-// Удобно для unit-тестов и in-memory simulation.
+// unit-тестов .
 func NewNodeFromID(id model.NodeID, cfg Config) (*Node, error) {
 	peer := model.NewPeer(id, nil, nil)
 	return NewNode(peer, cfg)
@@ -51,7 +50,6 @@ func (n *Node) Self() *model.Peer {
 	if n == nil || n.self == nil {
 		return nil
 	}
-
 	return n.self.Clone()
 }
 
@@ -60,19 +58,16 @@ func (n *Node) Config() Config {
 	if n == nil {
 		return DefaultConfig()
 	}
-
 	return n.cfg
 }
 
 // RoutingTable возвращает таблицу маршрутизации.
-//
 // Возвращается указатель намеренно: это доменный объект,
 // через который usecase-слой будет выполнять Insert/FindClosest/RefreshTarget.
 func (n *Node) RoutingTable() *RoutingTable {
 	if n == nil {
 		return nil
 	}
-
 	return n.table
 }
 
@@ -81,7 +76,6 @@ func (n *Node) Store() *Store {
 	if n == nil {
 		return nil
 	}
-
 	return n.store
 }
 
@@ -93,7 +87,6 @@ func (n *Node) InsertPeer(peer *model.Peer) InsertResult {
 			Err:    ErrNilNode,
 		}
 	}
-
 	return n.table.Insert(peer)
 }
 
@@ -172,7 +165,6 @@ func (n *Node) HandleFindNode(from *model.Peer, target model.NodeID, limit int) 
 }
 
 // HandleFindValue обрабатывает входящий FIND_VALUE.
-//
 // Логика Kademlia:
 //   - если значение найдено локально — вернуть значение;
 //   - если не найдено — вернуть ближайших известных peer.
@@ -180,15 +172,12 @@ func (n *Node) HandleFindValue(from *model.Peer, key model.NodeID, limit int) (F
 	if n == nil {
 		return FindValueResult{}, ErrNilNode
 	}
-
 	if from != nil {
 		n.InsertPeer(from)
 	}
-
 	if limit <= 0 {
 		limit = n.cfg.K
 	}
-
 	// 1. Сначала пробуем найти PeerRecord.
 	if record, ok := n.store.GetPeerRecord(key); ok {
 		return FindValueResult{
